@@ -47,14 +47,16 @@ class ProductDetail extends Component {
             <Text> Il en reste : {product.quantity} </Text>
             <Text>Prix à l'unité : {product.prix_unit} €</Text>
           </View>
+          <View style={{alignItems:'center',margin:20}}>
           {product.quantity > 0 ?
-            cart.data.some(t => t.id == product.id) ? <Text style={{textAlign: 'center', color: 'green'}}> Dans le panier </Text> :
+            cart.data.some(t => t.id == product.id) ? <Image style={ {width:40, height:40}} source={require('../images/shopping-cart.png')} /> :
             <Button
             title="Ajouter au panier"
             onPress={() => addProduct(product)}
             />
             :
-            <Text style={{color: 'red', textAlign:'center'}}> Rupture de stock </Text>}
+            <Text style={{color: 'red'}}> Rupture de stock </Text>}
+          </View>
         </ScrollView>
 
       )

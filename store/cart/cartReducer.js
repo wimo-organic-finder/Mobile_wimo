@@ -37,7 +37,9 @@ const cart = (state = {
         case actions.ADD_QUANTITY: {
             let data = state.data.map( t => {
                 if (t.id === action.index) {
+                  if(t.quantity >= t.quantityCart + action.quantity){
                     t.quantityCart += parseInt(action.quantity)
+                  }
                 }
                 return t;
                 });
@@ -51,7 +53,9 @@ const cart = (state = {
         case actions.REMOVE_QUANTITY: {
             let data = state.data.map( t => {
                 if (t.id === action.index) {
+                  if(t.quantityCart > 1){
                     t.quantityCart -= parseInt(action.quantity)
+                  }
                 }
                 return t;
                 });

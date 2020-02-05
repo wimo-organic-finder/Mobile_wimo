@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
 import ProductItem from './ProductItem'
+import CartItem from './CartItem'
+import {connect} from 'react-redux'
 
-
-export default class MyComponent extends React.Component {
+ class ProductList extends React.Component {
   showProduct = (id) => {
     this.props.navigation.navigate('Detail',{id})
   }
@@ -14,12 +15,14 @@ export default class MyComponent extends React.Component {
     return(
       <FlatList
         data={product}
-        renderItem={({ item }) => <ProductItem item={item} showProduct={this.showProduct} panier={panier}/>}
-        keyExtractor={item => item.id} />
+        renderItem={({ item }) => (panier ? <CartItem item={item} /> : <ProductItem item={item} showProduct={this.showProduct}/>)}
+        keyExtractor={item => item.id}
+        />
     )
 
   }
 }
+export default ProductList
 
 const styles = StyleSheet.create({
   container: {

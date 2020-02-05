@@ -1,4 +1,4 @@
-const url = 'http://192.168.1.27:8000'
+const site = 'http://192.168.1.36:8000'
 
 const headerGet = {
   headers: {
@@ -9,15 +9,15 @@ const headerGet = {
 }
 
 export function getProduct () {
-  const fullurl = url + '/api/produit'
-  return fetch(fullurl,headerGet)
+  const url = site + '/api/produit'
+  return fetch(url,headerGet)
     .then((response) => response.json())
     .catch((error) => console.log(error))
 }
 
 export function getProductById (id) {
-  const fullurl = url + '/api/produit/' + id
-  return fetch(fullurl,headerGet)
+  const url = site + '/api/produit/' + id
+  return fetch(url,headerGet)
     .then((response) => response.json())
     .catch((error) => console.log(error))
 }
