@@ -11,18 +11,18 @@ import {connect} from 'react-redux'
 
 
   render() {
-    const {product, panier} = this.props
+    const {product, panier,cart} = this.props
     return(
       <FlatList
         data={product}
-        renderItem={({ item }) => (panier ? <CartItem item={item} /> : <ProductItem item={item} showProduct={this.showProduct}/>)}
+        renderItem={({ item }) => (panier ? <CartItem item={item} /> : <ProductItem item={item} showProduct={this.showProduct} inCart={cart.data.some(t => t.id === item.id)}/>)}
         keyExtractor={item => item.id}
         />
     )
 
   }
 }
-export default ProductList
+export default connect(state => {return { cart: state}})(ProductList)
 
 const styles = StyleSheet.create({
   container: {
