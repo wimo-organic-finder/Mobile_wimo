@@ -1,25 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
-import DropBounce from './animation/DropBounce'
+import {FirstScreenLoad} from './Loading'
 import Navigation from './navigation/Navigation'
-import Product from './components/Product'
+import {Provider} from 'react-redux'
+import store from './store'
 
-export default class MyComponent extends React.Component {
+export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       loading: true
     }
-  }
-
-  _screenLoad () {
-    return (
-      <View style={styles.screen}>
-        <DropBounce>
-          <Image source={require('./images/wimo-logo.png')} />
-        </DropBounce>
-      </View>
-    )
   }
 
   componentDidMount () {
@@ -32,13 +23,11 @@ export default class MyComponent extends React.Component {
 
   render () {
     return (
-      <View style={styles.container}>
-
-        {this.state.loading ? this._screenLoad() : (
-          <Navigation />
-        )}
-
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          {this.state.loading ? <FirstScreenLoad /> : <Navigation />}
+        </View>
+      </Provider>
     )
   }
 }
@@ -47,10 +36,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  screen: {
-    position: 'absolute',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    backgroundColor: 'rgb(64, 205, 125)'
-  }
 })

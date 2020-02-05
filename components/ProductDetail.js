@@ -1,14 +1,13 @@
 
 
 import React, { Component } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet, ActivityIndicator,ScrollView, Image, Button
-} from 'react-native'
+import { View, Text, StyleSheet,ScrollView, Image, Button } from 'react-native'
 import { getProductById } from '../api/BDDApi'
+import {Loading}from '../Loading'
+import {connect} from 'react-redux'
+import {addProduct} from '../store/cart/cartAction'
 
-export default class MyComponent extends Component {
+class ProductDetail extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -30,15 +29,14 @@ export default class MyComponent extends Component {
   _displayLoading () {
   if (this.state.loading) {
     return (
-      <View style={styles.loading_container}>
-        <ActivityIndicator size='large' />
-      </View>
+      <Loading />
     )
   }
 }
 
   _displayProduct () {
     const { product } = this.state
+    const {cart, addProduct} = this.props
     if(product != undefined) {
       return (
         <ScrollView>
@@ -49,9 +47,14 @@ export default class MyComponent extends Component {
             <Text> Il en reste : {product.quantity} </Text>
             <Text>Prix à l'unité : {product.prix_unit} €</Text>
           </View>
-          <Button
-          title="Ajouter au panier"
-          />
+          {product.quantity > 0 ?
+            cart.data.some(t => t.id == product.id) ? <Text style={{textAlign: 'center', color: 'green'}}> Dans le panier </Text> :
+            <Button
+            title="Ajouter au panier"
+            onPress={() => addProduct(product)}
+            />
+            :
+            <Text style={{color: 'red', textAlign:'center'}}> Rupture de stock </Text>}
         </ScrollView>
 
       )
@@ -74,15 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  loading_container: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   title: {
     fontSize:35,
     fontWeight: 'bold',
@@ -97,3 +91,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+export default connect(state => { return { cart : state }},{addProduct})(ProductDetail)
