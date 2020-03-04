@@ -18,7 +18,7 @@ class Product extends Component {
   componentDidMount () {
     getProduct().then(data => {
       this.setState({
-        product : data,
+        product : data.data,
         loading:false
       })
     })

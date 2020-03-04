@@ -16,7 +16,7 @@ import {connect} from 'react-redux'
       <FlatList
         data={product}
         renderItem={({ item }) => (panier ? <CartItem item={item} /> : <ProductItem item={item} showProduct={this.showProduct} inCart={cart.data.some(t => t.id === item.id)}/>)}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         />
     )
 

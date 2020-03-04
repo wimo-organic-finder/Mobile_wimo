@@ -10,7 +10,7 @@ const cart = (state = {
     const updateTotal = (data) => {
         let total
          = 0;
-        data.map(t => total += t.quantityCart * t.prix_unit);
+        data.map(t => total += t.quantityCart * t.price_unit);
         return total.toFixed(2);
     }
     switch(action.type){

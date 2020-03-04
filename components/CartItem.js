@@ -11,7 +11,7 @@ const CartItem = ({item,deleteProduct, addQuantity, removeQuantity}) => (
     <Image style={{width: 100, height: 100}} source={{url : item.img}} />
     <View style={styles.card}>
       <Text style={styles.title}>{item.name}</Text>
-      <Text >Prix : {item.prix_unit} €</Text>
+      <Text >Prix : {item.price_unit} €</Text>
       <View style={styles.quantity}>
         <TouchableOpacity onPress={() => removeQuantity(item.id)} >
           <Image style={styles.icon} source={require('../images/minus.png')} />

@@ -12,7 +12,7 @@ const ProductItem = ({ item, showProduct, inCart }) => (
           {item.quantity > 0 ? <Text>Il en reste : {item.quantity}</Text> : <Text style={{color: 'red'}}> Rupture de stock </Text>}
         </View>
         <View style={styles.prix}>
-          <Text >Prix : {item.prix_unit} €</Text>
+          <Text >Prix : {item.price_unit} €</Text>
         </View>
       </TouchableOpacity>
 )

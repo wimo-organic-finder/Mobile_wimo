@@ -20,7 +20,7 @@ class ProductDetail extends Component {
     const id = this.props.navigation.getParam('id')
     getProductById(id).then( data => {
       this.setState ({
-        product: data,
+        product: data.data,
         loading: false,
       })
     })
@@ -45,7 +45,7 @@ class ProductDetail extends Component {
           <Text style={styles.description}>{product.description}</Text>
           <View style={styles.details}>
             <Text> Il en reste : {product.quantity} </Text>
-            <Text>Prix à l'unité : {product.prix_unit} €</Text>
+            <Text>Prix à l'unité : {product.price_unit} €</Text>
           </View>
           <View style={{alignItems:'center',margin:20}}>
           {product.quantity > 0 ?
